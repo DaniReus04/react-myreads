@@ -1,4 +1,55 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.shelves {
+  font-size: 23px;
+}
+
+.reading {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.going-to {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.read {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+hr {
+  padding: 15px;
+  color: black;
+  background-image: #0433ff;
+}
+
+hr::after {
+  display: inline-block;
+  position: relative;
+  font-size: 25px;
+  padding: 8px 13px;
+}
+
+.hr::after {
+  content: "Reading";
+}
+
+.hr1::after {
+  content: "Going to Read";
+}
+
+.hr2::after {
+  content: "Read";
 }

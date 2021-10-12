@@ -2,3 +2,11 @@
     margin: 0;
     padding: 0;
 }
+
+.header {
+    background-color: #0433ff;
+    color: white;
+    font-size: 30px;
+    padding: 15px;
+    text-align: center;
+}
