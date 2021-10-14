@@ -1,4 +1,5 @@
 import "./Shelves.css";
+import Actions from "./Actions.jsx"
 
 function Shelves({ reading, goingToRead, read }) {
   console.log("testeteste", reading);
@@ -10,9 +11,14 @@ function Shelves({ reading, goingToRead, read }) {
         {reading.map((item) => {
           return (
             <li className="reading-books" key={item.id}>
-              <figure className="image">
-                <img src={item.imageLinks.smallThumbnail} alt={item.title} />
+              <figure>
+                <img
+                  className="image"
+                  src={item.imageLinks.thumbnail}
+                  alt={item.title}
+                />
               </figure>
+              <Actions />
               <div>
                 <p className="title">{item.title}</p>
                 <p className="author">{item.authors}</p>
@@ -26,8 +32,12 @@ function Shelves({ reading, goingToRead, read }) {
         {goingToRead.map((item) => {
           return (
             <li className="going-to-books" key={item.id}>
-              <figure className="image">
-                <img src={item.imageLinks.smallThumbnail} alt={item.title} />
+              <figure>
+                <img
+                  className="image"
+                  src={item.imageLinks.thumbnail}
+                  alt={item.title}
+                />
               </figure>
               <div>
                 <p className="title">{item.title}</p>
@@ -42,8 +52,12 @@ function Shelves({ reading, goingToRead, read }) {
         {read.map((item) => {
           return (
             <li className="read-books" key={item.id}>
-              <figure className="image">
-                <img src={item.imageLinks.smallThumbnail} alt={item.title} />
+              <figure>
+                <img
+                  className="image"
+                  src={item.imageLinks.thumbnail}
+                  alt={item.title}
+                />
               </figure>
               <div>
                 <p className="title">{item.title}</p>

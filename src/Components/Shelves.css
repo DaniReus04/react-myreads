@@ -3,7 +3,8 @@
   overflow: hidden;
 }
 
-.shelves ul{
+.shelves ul {
+  width: 100%;
   padding: 10px;
   margin: 30px;
   display: flex;
@@ -12,14 +13,14 @@
   flex-wrap: wrap;
 }
 
-.shelves li{
-  padding: 10px 20px;
+.shelves li {
+  padding: 10px 40px;
   text-align: left;
 }
 
 .title {
   color: black;
-  font: bold;
+  font: bolder;
 }
 
 .author {

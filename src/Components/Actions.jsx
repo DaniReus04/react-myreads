@@ -1,11 +1,16 @@
-import "./Actions.css"
+import "./Actions.css";
 
-function Actions(){
-    return(
-        <div>
-            <p>These are going to be the actions</p>
-        </div>
-    )
+function Actions() {
+  return (
+    <div>
+      <select className="books-actions">
+        <option>Reading</option>
+        <option>Going to Read</option>
+        <option>Read</option>
+        <option>None</option>
+      </select>
+    </div>
+  );
 }
 
 export default Actions;
