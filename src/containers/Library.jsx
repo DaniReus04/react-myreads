@@ -15,10 +15,14 @@ function Library() {
     BooksAPI.getAll().then((res) => {
       console.log("Daniel2", res)
       setReading(res.filter(item => item.shelf === "currentlyReading" ))
+      setGoingToRead(res.filter(item => item.shelf === "wantToRead"))
+      setRead(res.filter(item => item.shelf === "read"))
+      setNone(res.filter(item => item.shelf === ""))
     })
   },[])
 
   console.log("Daniel3", reading)
+  console.log("teste", none)
 
   return (
     <>

@@ -1,32 +1,29 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.image {
+  width: 100%;
+  overflow: hidden;
 }
 
-.shelves {
-  font-size: 15px;
-}
-
-.reading {
-  padding: 30px;
+.shelves ul{
+  padding: 10px;
+  margin: 30px;
   display: flex;
   justify-content: center;
   list-style: none;
+  flex-wrap: wrap;
 }
 
-.going-to {
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-  list-style: none;
+.shelves li{
+  padding: 10px 20px;
+  text-align: left;
 }
 
-.read {
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-  list-style: none;
+.title {
+  color: black;
+  font: bold;
+}
+
+.author {
+  color: gray;
 }
 
 hr {

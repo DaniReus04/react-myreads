@@ -1,8 +1,7 @@
 import "./Shelves.css";
-import book from "../Tools/manga1.png";
 
-function Shelves({ reading, goingToRead, read, none }) {
-  console.log("Daniel4", reading);
+function Shelves({ reading, goingToRead, read }) {
+  console.log("testeteste", reading);
 
   return (
     <section className="shelves">
@@ -11,25 +10,48 @@ function Shelves({ reading, goingToRead, read, none }) {
         {reading.map((item) => {
           return (
             <li key={item.id}>
-              <img src={item.imageLinks.thumbnail} alt={item.title} />
-              <p>{item.title}</p>
+              <figure className="image">
+                <img src={item.imageLinks.smallThumbnail} alt={item.title} />
+              </figure>
+              <div>
+                <p className="title">{item.title}</p>
+                <p className="author">{item.authors}</p>
+              </div>
             </li>
           );
         })}
       </ul>
       <hr className="hr1" />
       <ul className="going-to">
-        <li>
-          <img src={book} alt="book" />
-          <p>Livro</p>
-        </li>
+        {goingToRead.map((item) => {
+          return (
+            <li key={item.id}>
+              <figure className="image">
+                <img src={item.imageLinks.smallThumbnail} alt={item.title} />
+              </figure>
+              <div>
+                <p className="title">{item.title}</p>
+                <p className="author">{item.authors}</p>
+              </div>
+            </li>
+          );
+        })}
       </ul>
       <hr className="hr2" />
       <ul className="read">
-        <li>
-          <img src={book} alt="book" />
-          <p>Livro</p>
-        </li>
+        {read.map((item) => {
+          return (
+            <li key={item.id}>
+              <figure className="image">
+                <img src={item.imageLinks.smallThumbnail} alt={item.title} />
+              </figure>
+              <div>
+                <p className="title">{item.title}</p>
+                <p className="author">{item.authors}</p>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );
