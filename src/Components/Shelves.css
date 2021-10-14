@@ -26,6 +26,18 @@
   color: gray;
 }
 
+.reading-books {
+  max-width: 130px;
+}
+
+.going-to-books {
+  max-width: 130px;
+}
+
+.read-books {
+  max-width: 130px;
+}
+
 hr {
   padding: 15px;
   color: black;

@@ -9,7 +9,7 @@ function Shelves({ reading, goingToRead, read }) {
       <ul className="reading">
         {reading.map((item) => {
           return (
-            <li key={item.id}>
+            <li className="reading-books" key={item.id}>
               <figure className="image">
                 <img src={item.imageLinks.smallThumbnail} alt={item.title} />
               </figure>
@@ -25,7 +25,7 @@ function Shelves({ reading, goingToRead, read }) {
       <ul className="going-to">
         {goingToRead.map((item) => {
           return (
-            <li key={item.id}>
+            <li className="going-to-books" key={item.id}>
               <figure className="image">
                 <img src={item.imageLinks.smallThumbnail} alt={item.title} />
               </figure>
@@ -41,7 +41,7 @@ function Shelves({ reading, goingToRead, read }) {
       <ul className="read">
         {read.map((item) => {
           return (
-            <li key={item.id}>
+            <li className="read-books" key={item.id}>
               <figure className="image">
                 <img src={item.imageLinks.smallThumbnail} alt={item.title} />
               </figure>
