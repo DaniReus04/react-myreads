@@ -1,8 +1,6 @@
 import "./Shelves.css";
-import Actions from "./Actions.jsx"
 
 function Shelves({ reading, goingToRead, read }) {
-  console.log("testeteste", reading);
 
   return (
     <section className="shelves">
@@ -18,7 +16,6 @@ function Shelves({ reading, goingToRead, read }) {
                   alt={item.title}
                 />
               </figure>
-              <Actions />
               <div>
                 <p className="title">{item.title}</p>
                 <p className="author">{item.authors}</p>

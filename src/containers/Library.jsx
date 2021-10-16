@@ -11,18 +11,22 @@ function Library() {
   const [none, setNone] = useState([]);
 
   useEffect(() => {
-    console.log("Daniel")
     BooksAPI.getAll().then((res) => {
-      console.log("Daniel2", res)
-      setReading(res.filter(item => item.shelf === "currentlyReading" ))
-      setGoingToRead(res.filter(item => item.shelf === "wantToRead"))
-      setRead(res.filter(item => item.shelf === "read"))
-      setNone(res.filter(item => item.shelf === ""))
-    })
-  },[])
+      setReading(res.filter((item) => item.shelf === "currentlyReading"));
+      setGoingToRead(res.filter((item) => item.shelf === "wantToRead"));
+      setRead(res.filter((item) => item.shelf === "read"));
+      setNone(res.filter((item) => item.shelf === ""));
+    });
+  }, []);
 
-  console.log("Daniel3", reading)
-  console.log("teste", none)
+  function onChange(e, book) {
+    e.preventDefault();
+    const changeShelf = e.target.value;
+
+    BooksAPI.update(book, changeShelf).then(() => {
+      book.shelf = changeShelf;
+    });
+  }
 
   return (
     <>
