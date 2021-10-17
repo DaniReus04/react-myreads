@@ -9,6 +9,7 @@ function Library() {
   const [goingToRead, setGoingToRead] = useState([]);
   const [read, setRead] = useState([]);
   const [none, setNone] = useState([]);
+  const [myBooks, setMyBooks] = useState([reading, read, goingToRead]);
 
   useEffect(() => {
     BooksAPI.getAll().then((res) => {
@@ -19,12 +20,20 @@ function Library() {
     });
   }, []);
 
-  function onChange(e, book) {
+  function onChangeBook(e, book, currShelf, none) {
     e.preventDefault();
     const changeShelf = e.target.value;
 
     BooksAPI.update(book, changeShelf).then(() => {
       book.shelf = changeShelf;
+
+      setMyBooks((prevShelf) => {
+        if (changeShelf !== none) prevShelf.myBooks[changeShelf].push(book);
+        else {
+        if (currShelf)
+            prevShelf.myBooks[currShelf].filter((item) => item.id !== book.id);
+        }
+      });
     });
   }
 
@@ -33,6 +42,8 @@ function Library() {
       <Header />
       <div className="library">
         <Shelves
+          onChange={onChangeBook}
+          myBooks={myBooks}
           reading={reading}
           goingToRead={goingToRead}
           read={read}
