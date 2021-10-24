@@ -1,10 +1,9 @@
 import "./Shelves.css";
 
-function Shelves({ reading, goingToRead, read, onChangeBook, book }) {
+function Shelves({ reading, goingToRead, read, onChange }) {
   return (
     <section className="shelves">
       <hr className="hr" />
-
       <ul className="reading">
         {reading.map((item) => {
           return (
@@ -25,15 +24,16 @@ function Shelves({ reading, goingToRead, read, onChangeBook, book }) {
               <div>
                 <select
                   className="books-actions"
-                  onChange={(e) => onChangeBook(e, book, book.shelf)}
+                  value={item.shelf}
+                  onChange={(e) => onChange(e, item, item.shelf)}
                 >
                   <option value="" disabled>
                     Move to...
                   </option>
-                  <option>Reading</option>
-                  <option>Going to Read</option>
-                  <option>Read</option>
-                  <option>None</option>
+                  <option value="currentlyReading">Reading</option>
+                  <option value="wantToRead">Going to Read</option>
+                  <option value="read">Read</option>
+                  <option value="">None</option>
                 </select>
               </div>
             </li>
@@ -61,15 +61,16 @@ function Shelves({ reading, goingToRead, read, onChangeBook, book }) {
               <div>
                 <select
                   className="books-actions"
-                  onChange={(e) => onChangeBook(e, book, book.shelf)}
+                  value={item.shelf}
+                  onChange={(e) => onChange(e, item, item.shelf)}
                 >
                   <option value="" disabled>
                     Move to...
                   </option>
-                  <option>Reading</option>
-                  <option>Going to Read</option>
-                  <option>Read</option>
-                  <option>None</option>
+                  <option value="currentlyReading">Reading</option>
+                  <option value="wantToRead">Going to Read</option>
+                  <option value="read">Read</option>
+                  <option value="">None</option>
                 </select>
               </div>
             </li>
@@ -97,15 +98,16 @@ function Shelves({ reading, goingToRead, read, onChangeBook, book }) {
               <div>
                 <select
                   className="books-actions"
-                  onChange={(e) => onChangeBook(e, book, book.shelf)}
+                  value={item.shelf}
+                  onChange={(e) => onChange(e, item, item.shelf)}
                 >
                   <option value="" disabled>
                     Move to...
                   </option>
-                  <option>Reading</option>
-                  <option>Going to Read</option>
-                  <option>Read</option>
-                  <option>None</option>
+                  <option value="currentlyReading">Reading</option>
+                  <option value="wantToRead">Going to Read</option>
+                  <option value="read">Read</option>
+                  <option value="">None</option>
                 </select>
               </div>
             </li>

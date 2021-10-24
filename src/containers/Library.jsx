@@ -5,49 +5,104 @@ import Shelves from "../Components/Shelves";
 import * as BooksAPI from "../API/BooksAPI";
 
 function Library() {
-  const [reading, setReading] = useState([]);
-  const [goingToRead, setGoingToRead] = useState([]);
-  const [read, setRead] = useState([]);
-  const [none, setNone] = useState([]);
-  const [myBooks, setMyBooks] = useState([reading, read, goingToRead]);
+  const [shelves, setShelves] = useState({
+    currentlyReading: [],
+    wantToRead: [],
+    read: [],
+  });
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     BooksAPI.getAll().then((res) => {
-      setReading(res.filter((item) => item.shelf === "currentlyReading"));
-      setGoingToRead(res.filter((item) => item.shelf === "wantToRead"));
-      setRead(res.filter((item) => item.shelf === "read"));
-      setNone(res.filter((item) => item.shelf === ""));
+      setShelves({
+        currentlyReading: res.filter(
+          (item) => item.shelf === "currentlyReading"
+        ),
+        wantToRead: res.filter((item) => item.shelf === "wantToRead"),
+        read: res.filter((item) => item.shelf === "read"),
+      });
+      setLoader(false);
     });
   }, []);
 
-  function onChangeBook(e, book, currShelf, none) {
+  const onChange = async (e, book, oldShelf) => {
     e.preventDefault();
-    const changeShelf = e.target.value;
+    const newShelf = e.target.value;
+    setLoader(true);
 
-    BooksAPI.update(book, changeShelf).then(() => {
-      book.shelf = changeShelf;
+    await BooksAPI.update(book, newShelf).then(() => {
+      book.shelf = newShelf;
 
-      setMyBooks((prevShelf) => {
-        if (changeShelf !== none) prevShelf.myBooks[changeShelf].push(book);
-        else {
-        if (currShelf)
-            prevShelf.myBooks[currShelf].filter((item) => item.id !== book.id);
-        }
+      setShelves({
+        ...shelves,
+        [newShelf]: [...shelves[newShelf], book],
+        [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id),
       });
+
+      // switch (newShelf) {
+      //   case "currentlyReading":
+      //     console.log("123");
+      //     setShelves({
+      //       ...shelves,
+      //       currentlyReading: [...shelves.currentlyReading, book],
+      //       [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id),
+      //     });
+      //     break;
+
+      //   case "wantToRead":
+      //     setShelves({
+      //       ...shelves,
+      //       wantToRead: [...shelves.wantToRead, book],
+      //       [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id),
+      //     });
+      //     break;
+
+      //   case "read":
+      //     setShelves({
+      //       ...shelves,
+      //       read: [...shelves.read, book],
+      //       [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id),
+      //     });
+      //     break;
+
+      //   default:
+      //     break;
+      // }
     });
-  }
+    setLoader(false);
+  };
 
   return (
     <>
       <Header />
       <div className="library">
+        {loader && (
+          <div
+            style={{
+              position: "fixed",
+              left: 0,
+              top: 0,
+              zIndex: 1,
+              height: "100%",
+              width: "100%",
+              backgroundColor: "white",
+              opacity: 0.86,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              alignContent: "center",
+              fontSize: 25,
+              color: "black",
+            }}
+          >
+            ...loading
+          </div>
+        )}
         <Shelves
-          onChange={onChangeBook}
-          myBooks={myBooks}
-          reading={reading}
-          goingToRead={goingToRead}
-          read={read}
-          none={none}
+          onChange={onChange}
+          reading={shelves.currentlyReading}
+          goingToRead={shelves.wantToRead}
+          read={shelves.read}
         />
       </div>
     </>
