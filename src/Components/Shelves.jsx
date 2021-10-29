@@ -17,24 +17,23 @@ function Shelves({ reading, goingToRead, read, onChange }) {
                   />
                 </figure>
                 <div>
+                  <select
+                    className="books-actions-select"
+                    onChange={(e) => onChange(e, item, item.shelf)}
+                  >
+                    <option selected disabled>
+                      Move to...
+                    </option>
+                    <option value="currentlyReading">Reading</option>
+                    <option value="wantToRead">Going to Read</option>
+                    <option value="read">Read</option>
+                    <option value="">None</option>
+                  </select>
+                </div>
+                <div>
                   <p className="title">{item.title}</p>
                   <p className="author">{item.authors}</p>
                 </div>
-              </div>
-              <div>
-                <select
-                  className="books-actions"
-                  value={item.shelf}
-                  onChange={(e) => onChange(e, item, item.shelf)}
-                >
-                  <option value="" disabled>
-                    Move to...
-                  </option>
-                  <option value="currentlyReading">Reading</option>
-                  <option value="wantToRead">Going to Read</option>
-                  <option value="read">Read</option>
-                  <option value="">None</option>
-                </select>
               </div>
             </li>
           );
@@ -54,24 +53,23 @@ function Shelves({ reading, goingToRead, read, onChange }) {
                   />
                 </figure>
                 <div>
+                  <select
+                    className="books-actions-select"
+                    onChange={(e) => onChange(e, item, item.shelf)}
+                  >
+                    <option selected disabled>
+                      Move to...
+                    </option>
+                    <option value="currentlyReading">Reading</option>
+                    <option value="wantToRead">Going to Read</option>
+                    <option value="read">Read</option>
+                    <option value="">None</option>
+                  </select>
+                </div>
+                <div>
                   <p className="title">{item.title}</p>
                   <p className="author">{item.authors}</p>
                 </div>
-              </div>
-              <div>
-                <select
-                  className="books-actions"
-                  value={item.shelf}
-                  onChange={(e) => onChange(e, item, item.shelf)}
-                >
-                  <option value="" disabled>
-                    Move to...
-                  </option>
-                  <option value="currentlyReading">Reading</option>
-                  <option value="wantToRead">Going to Read</option>
-                  <option value="read">Read</option>
-                  <option value="">None</option>
-                </select>
               </div>
             </li>
           );
@@ -91,24 +89,23 @@ function Shelves({ reading, goingToRead, read, onChange }) {
                   />
                 </figure>
                 <div>
+                  <select
+                    className="books-actions-select"
+                    onChange={(e) => onChange(e, item, item.shelf)}
+                  >
+                    <option selected disabled>
+                      Move to...
+                    </option>
+                    <option value="currentlyReading">Reading</option>
+                    <option value="wantToRead">Going to Read</option>
+                    <option value="read">Read</option>
+                    <option value="">None</option>
+                  </select>
+                </div>
+                <div>
                   <p className="title">{item.title}</p>
                   <p className="author">{item.authors}</p>
                 </div>
-              </div>
-              <div>
-                <select
-                  className="books-actions"
-                  value={item.shelf}
-                  onChange={(e) => onChange(e, item, item.shelf)}
-                >
-                  <option value="" disabled>
-                    Move to...
-                  </option>
-                  <option value="currentlyReading">Reading</option>
-                  <option value="wantToRead">Going to Read</option>
-                  <option value="read">Read</option>
-                  <option value="">None</option>
-                </select>
               </div>
             </li>
           );
