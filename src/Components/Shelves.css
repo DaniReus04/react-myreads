@@ -78,3 +78,12 @@ hr::after {
   border-width: 0.13em;
   cursor: pointer;
 }
+
+.search-page-button {
+  position: fixed;
+  font-size: 30px;
+  text-decoration: none;
+  color: black;
+  bottom: 15px;
+  right: 15px;
+}

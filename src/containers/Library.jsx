@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
 import "./Library.css";
 import Header from "../Components/Header";
 import Shelves from "../Components/Shelves";
+import Search from "../Components/Search";
 import * as BooksAPI from "../API/BooksAPI";
 
 function Library() {
@@ -98,12 +100,19 @@ function Library() {
             ...loading
           </div>
         )}
-        <Shelves
-          onChange={onChange}
-          reading={shelves.currentlyReading}
-          goingToRead={shelves.wantToRead}
-          read={shelves.read}
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <Shelves
+              onChange={onChange}
+              reading={shelves.currentlyReading}
+              goingToRead={shelves.wantToRead}
+              read={shelves.read}
+            />
+          )}
         />
+        <Route path="/search" render={() => <Search />} />
       </div>
     </>
   );
