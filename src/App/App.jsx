@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
-import "./Library.css";
-import Header from "../Components/Header";
-import Shelves from "../Components/Shelves";
-import Search from "../Components/Search";
+import "./App.css";
+import Header from "../Components/Header/Header";
+import Search from "../Pages/Search/Search";
 import * as BooksAPI from "../API/BooksAPI";
+import Home from "../Pages/Home/Home.jsx";
 
-function Library() {
+function App() {
   const [shelves, setShelves] = useState({
     currentlyReading: [],
     wantToRead: [],
@@ -73,7 +73,6 @@ function Library() {
     });
     setLoader(false);
   };
-
   return (
     <>
       <Header />
@@ -104,11 +103,11 @@ function Library() {
           exact
           path="/"
           render={() => (
-            <Shelves
-              onChange={onChange}
-              reading={shelves.currentlyReading}
-              goingToRead={shelves.wantToRead}
+            <Home
+              currentlyReading={shelves.currentlyReading}
+              wantToRead={shelves.wantToRead}
               read={shelves.read}
+              onChange={onChange}
             />
           )}
         />
@@ -118,4 +117,4 @@ function Library() {
   );
 }
 
-export default Library;
+export default App;

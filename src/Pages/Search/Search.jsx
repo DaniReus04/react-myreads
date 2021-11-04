@@ -1,8 +1,8 @@
 import "./Search.css";
 import { Link } from "react-router-dom";
-import BackArrow from "../utils/BackArrow.png";
+import BackArrow from "../../utils/BackArrow.png";
 
-function Search() {
+function Search(onSearch) {
   return (
     <>
       <div className="search-section">
@@ -12,8 +12,8 @@ function Search() {
         <input
           className="search-box"
           type="text"
-          name="book-search"
           placeholder="Type your book here..."
+          onChange={() => onSearch}
         />
         <button className="search-button"> &#x1F50D; </button>
       </div>

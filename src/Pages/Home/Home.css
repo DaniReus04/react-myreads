@@ -1,18 +1,10 @@
+* {
+  overflow-x: hidden;
+}
+
 .image {
   width: 100%;
   overflow: hidden;
-}
-
-.shelves ul {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-size: 16px;
-  width: 100%;
-  padding: 10px;
-  margin: 30px;
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  flex-wrap: wrap;
 }
 
 .shelves li {
@@ -86,4 +78,16 @@ hr::after {
   color: black;
   bottom: 15px;
   right: 15px;
+}
+
+.shelves ul {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  flex-wrap: wrap;
 }
