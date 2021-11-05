@@ -1,7 +1,7 @@
 import React from "react";
 import Shelf from "../../Pages/Home/Home";
 
-function Shelves(shelves, onChange) {
+function Shelves({ shelves, onChange }) {
   return (
     <ul>
       {shelves &&

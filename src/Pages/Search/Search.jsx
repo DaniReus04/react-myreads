@@ -2,7 +2,7 @@ import "./Search.css";
 import { Link } from "react-router-dom";
 import BackArrow from "../../utils/BackArrow.png";
 
-function Search(onSearch) {
+function Search({ onChange, query }) {
   return (
     <>
       <div className="search-section">
@@ -13,7 +13,8 @@ function Search(onSearch) {
           className="search-box"
           type="text"
           placeholder="Type your book here..."
-          onChange={() => onSearch}
+          value={query}
+          onChange={onChange}
         />
         <button className="search-button"> &#x1F50D; </button>
       </div>

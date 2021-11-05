@@ -12,6 +12,10 @@ function App() {
     wantToRead: [],
     read: [],
   });
+  const [search, setSearch] = useState({
+    query: "",
+    books: [],
+  });
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
@@ -73,6 +77,27 @@ function App() {
     });
     setLoader(false);
   };
+
+  const onChangeSearch = async (e) => {
+    try {
+      const query = e.target.value;
+      setSearch({ query: query });
+
+      if (query.trim()) {
+        const yourSearch = await BooksAPI.search(query);
+        if (yourSearch.error) {
+          setSearch({ books: [] });
+        } else {
+          setSearch({ books: yourSearch });
+        }
+      } else {
+        setSearch({ books: [] });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   return (
     <>
       <Header />
@@ -111,7 +136,16 @@ function App() {
             />
           )}
         />
-        <Route path="/search" render={() => <Search />} />
+        <Route
+          path="/search"
+          render={() => (
+            <Search
+              onChange={onChangeSearch}
+              query={search.query}
+              books={search.books}
+            />
+          )}
+        />
       </div>
     </>
   );
