@@ -1,0 +1,11 @@
+.shelves {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  flex-wrap: wrap;
+}

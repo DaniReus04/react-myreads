@@ -2,3 +2,7 @@
   margin: 0;
   padding: 0;
 }
+
+.background {
+  background-color: rgba(218, 218, 218, 0.342);
+}
