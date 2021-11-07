@@ -5,17 +5,13 @@ import Header from "../Components/Header/Header";
 import Search from "../Pages/Search/Search";
 import * as BooksAPI from "../API/BooksAPI";
 import Home from "../Pages/Home/Home.jsx";
+import Loader from "../Components/Loader/Loader";
 
 function App() {
   const [shelves, setShelves] = useState({
     currentlyReading: [],
     wantToRead: [],
     read: [],
-    none: [],
-  });
-  const [search, setSearch] = useState({
-    query: "",
-    books: [],
   });
   const [loader, setLoader] = useState(true);
 
@@ -27,7 +23,6 @@ function App() {
         ),
         wantToRead: res.filter((item) => item.shelf === "wantToRead"),
         read: res.filter((item) => item.shelf === "read"),
-        none: res.filter((item) => item.shelf === ""),
       });
       setLoader(false);
     });
@@ -41,11 +36,18 @@ function App() {
     await BooksAPI.update(book, newShelf).then(() => {
       book.shelf = newShelf;
 
-      setShelves({
-        ...shelves,
-        [newShelf]: [...shelves[newShelf], book],
-        [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id),
-      });
+      if (newShelf !== "none") {
+        setShelves({
+          ...shelves,
+          [newShelf]: [...shelves[newShelf], book],
+          [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id),
+        });
+      } else {
+        setShelves({
+          ...shelves,
+          [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id),
+        });
+      }
 
       // switch (newShelf) {
       //   case "currentlyReading":
@@ -80,65 +82,17 @@ function App() {
     setLoader(false);
   };
 
-  const onChangeSearch = async (e) => {
-    const query = e.target.value;
-    setSearch({ query: query });
-
-    if (query.trim()) {
-      const yourSearch = await BooksAPI.search(query);
-      if (yourSearch.error) {
-        setSearch({ books: [] });
-      } else {
-        setSearch({ books: yourSearch });
-      }
-    } else {
-      setSearch({ books: [] });
-    }
-  };
-
   return (
     <>
       <Header />
-      {loader && (
-        <div
-          style={{
-            position: "fixed",
-            left: 0,
-            top: 0,
-            zIndex: 1,
-            height: "100%",
-            width: "100%",
-            backgroundColor: "white",
-            opacity: 0.86,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            alignContent: "center",
-            fontSize: 25,
-            color: "black",
-          }}
-        >
-          ...loading
-        </div>
-      )}
+      {loader && <Loader />}
       <div className="background">
         <Route
           exact
           path="/"
           render={() => <Home shelves={shelves} onChange={onChange} />}
         />
-        <Route
-          path="/search"
-          render={() => (
-            <Search
-              onChangeSearch={onChangeSearch}
-              onChange={onChange}
-              query={search.query}
-              books={search.books}
-              loader={setLoader}
-            />
-          )}
-        />
+        <Route path="/search" render={() => <Search onChange={onChange} />} />
       </div>
     </>
   );

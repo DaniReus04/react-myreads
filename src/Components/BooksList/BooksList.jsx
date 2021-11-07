@@ -22,7 +22,7 @@ function BooksList({ item, onChange }) {
             <option value="currentlyReading">Reading</option>
             <option value="wantToRead">Going to Read</option>
             <option value="read">Read</option>
-            <option value="">None</option>
+            <option value="none">None</option>
           </select>
         </div>
         <div>
