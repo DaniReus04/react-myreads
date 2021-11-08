@@ -9,11 +9,12 @@ import Loader from "../Components/Loader/Loader";
 
 function App() {
   const [shelves, setShelves] = useState({
+    //Here I created my books state
     currentlyReading: [],
     wantToRead: [],
     read: [],
   });
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(true); //A loader for the returning from API
 
   useEffect(() => {
     BooksAPI.getAll().then((res) => {
@@ -26,7 +27,7 @@ function App() {
       });
       setLoader(false);
     });
-  }, []);
+  }, []); //I get the books with the shelf property, and pass then to the correct state shelf
 
   const onChange = async (e, book, oldShelf) => {
     e.preventDefault();
@@ -36,19 +37,23 @@ function App() {
     await BooksAPI.update(book, newShelf).then(() => {
       book.shelf = newShelf;
 
-      if (newShelf !== "none") {
+      if (oldShelf !== undefined && newShelf !== "none") {
         setShelves({
           ...shelves,
           [newShelf]: [...shelves[newShelf], book],
           [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id),
         });
-      } else {
+      } else if (oldShelf !== undefined) {
         setShelves({
           ...shelves,
           [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id),
         });
+      } else {
+        setShelves({
+          ...shelves,
+          [newShelf]: [...shelves[newShelf], book],
+        });
       }
-
       // switch (newShelf) {
       //   case "currentlyReading":
       //     console.log("123");

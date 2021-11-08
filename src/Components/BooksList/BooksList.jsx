@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./BooksList.css";
 
 function BooksList({ item, onChange }) {
@@ -33,5 +34,10 @@ function BooksList({ item, onChange }) {
     </li>
   );
 }
+
+BooksList.propTypes = {
+  item: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default BooksList;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Search.css";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import * as BooksAPI from "../../API/BooksAPI";
 import BackArrow from "../../utils/BackArrow.png";
 import BooksList from "../../Components/BooksList/BooksList";
@@ -32,7 +33,6 @@ function Search({ onChange }) {
     }
     setLoader(false);
   };
-
   return (
     <>
       <div className="search-section">
@@ -78,5 +78,8 @@ function Search({ onChange }) {
     </>
   );
 }
+Search.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Search;

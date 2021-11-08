@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import "./Home.css";
 import Shelves from "../../Components/Shelves/Shelves";
 
@@ -19,5 +20,10 @@ function Home({ shelves, onChange }) {
     </>
   );
 }
+
+Home.propTypes = {
+  shelves: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Home;
