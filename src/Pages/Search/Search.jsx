@@ -57,7 +57,16 @@ function Search({ onChange }) {
         <Loader />
       ) : (
         <>
-          {booksError && <p>Something went wrong!</p>}
+          {booksError && (
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "25px",
+              }}
+            >
+              Something went wrong!
+            </p>
+          )}
           {search.books && search.books.length > 0 && (
             <ul className="books-ul">
               {search.books.map((books) => {

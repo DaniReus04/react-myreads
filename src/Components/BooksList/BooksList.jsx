@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import "./BooksList.css";
+import NoImage from "../../utils/noimage.png";
 
 //In this page I created the books list to use in the Home and Search page when the books are beeing requested
 
@@ -10,7 +11,11 @@ function BooksList({ item, onChange }) {
         <div className="image">
           <figure>
             <img
-              src={item.imageLinks ? item.imageLinks.thumbnail : ""}
+              src={
+                item.imageLinks && item.imageLinks.thumbnail
+                  ? item.imageLinks.thumbnail
+                  : NoImage
+              }
               alt={item.title}
             />
           </figure>
@@ -18,7 +23,7 @@ function BooksList({ item, onChange }) {
         <div>
           <select
             className="books-actions-select"
-            value="Move to..."
+            value={item.shelf ? item.shelf : "none"}
             onChange={(e) => onChange(e, item, item.shelf)}
           >
             <option disabled>Move to...</option>
