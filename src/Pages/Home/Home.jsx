@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import "./Home.css";
 import Shelves from "../../Components/Shelves/Shelves";
 
+//Here a seted it shelf to their correct status and created a Link to the search page
+
 function Home({ shelves, onChange }) {
   return (
     <>

@@ -1,3 +1,5 @@
+//This is the loader I used for onChangeSearch and onChange
+
 const Loader = () => {
   return (
     <div

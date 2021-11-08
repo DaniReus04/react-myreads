@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import "./Shelves.css";
 import BooksList from "../BooksList/BooksList.jsx";
 
+//Here I created the shelves list to put in the home page 
+
 function Shelves({ shelves, onChange }) {
   return (
     <ul className="shelves">

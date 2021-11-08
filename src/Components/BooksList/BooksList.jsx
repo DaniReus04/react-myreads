@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import "./BooksList.css";
 
+//In this page I created the books list to use in the Home and Search page when the books are beeing requested
+
 function BooksList({ item, onChange }) {
   return (
     <li className="shelf" key={item.id}>

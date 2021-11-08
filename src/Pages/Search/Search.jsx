@@ -8,6 +8,8 @@ import BooksList from "../../Components/BooksList/BooksList";
 import Loader from "../../Components/Loader/Loader";
 import { DebounceInput } from "react-debounce-input";
 
+// Here I created a Link to the home page and the input fild with query and the books list
+
 function Search({ onChange }) {
   const [loader, setLoader] = useState(false);
   const [search, setSearch] = useState({
@@ -17,21 +19,22 @@ function Search({ onChange }) {
   const [booksError, setBooksError] = useState(false);
 
   const onChangeSearch = async (e) => {
-    setLoader(true);
+    setLoader(true); //Activating the loader when onChangeSearch is requested
     const query = e.target.value;
     setSearch({ query: query });
 
     if (query.trim()) {
       const yourSearch = await BooksAPI.search(query);
       if (yourSearch.error) {
+        //Here is saying then only when get error show no books
         setBooksError(true);
         setSearch({ books: [] });
       } else {
         setBooksError(false);
-        setSearch({ books: yourSearch });
+        setSearch({ books: yourSearch }); //Here is saying to when the search is Ok show the books
       }
     }
-    setLoader(false);
+    setLoader(false); //Saying to use the loader only in onChangeSearch
   };
   return (
     <>
@@ -39,15 +42,7 @@ function Search({ onChange }) {
         <Link className="go-back" to="/">
           <img src={BackArrow} alt="Back" />
         </Link>
-        {/* <input
-          className="search-box"
-          type="text"
-          placeholder="Type your book here..."
-          disabled={loader}
-          value={search.query}
-          onChange={onChangeSearch}
-        /> */}
-        <DebounceInput
+        <DebounceInput //Imported a DebounceInput to set a minLength of caracters and a timeout when the user stop typing to search the correct books
           className="search-box"
           placeholder="Type your book here..."
           minLength={1}
