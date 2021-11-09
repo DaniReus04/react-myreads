@@ -4,7 +4,7 @@ import "./App.css";
 import Header from "../Components/Header/Header";
 import Search from "../Pages/Search/Search";
 import * as BooksAPI from "../API/BooksAPI";
-import Home from "../Pages/Home/Home.jsx";
+import Home from "../Pages/Home/Home.js";
 import Loader from "../Components/Loader/Loader";
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
     currentlyReading: [],
     wantToRead: [],
     read: [],
+    none: [],
   });
   const [loader, setLoader] = useState(true); //A loader for the returning from API
 
@@ -24,6 +25,7 @@ function App() {
         ),
         wantToRead: res.filter((item) => item.shelf === "wantToRead"),
         read: res.filter((item) => item.shelf === "read"),
+        none: res && res.length ? res : [],
       });
       setLoader(false);
     });
@@ -37,29 +39,25 @@ function App() {
     await BooksAPI.update(book, newShelf).then(() => {
       book.shelf = newShelf;
 
-      if (oldShelf !== undefined && newShelf !== "none") {
+      if (newShelf !== "none") {
         //In this part, I called only the books that already have a shelf and are going to a new one
         setShelves({
           ...shelves,
           [newShelf]: [...shelves[newShelf], book], //newShelf request
           [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id), //oldShelf remove
         });
-      } else if (oldShelf !== undefined) {
+      } else {
         //In this part, I called only the books that are moving out of it shelf and aren't going to a new one, resuming, books that the user remove
         setShelves({
           ...shelves,
           [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id),
         });
-      } else {
-        //Here the user call the books on search page, and put in their own shelves
-        setShelves({
-          ...shelves,
-          [newShelf]: [...shelves[newShelf], book],
-        });
       }
     });
     setLoader(false); //Here I confirmed the Loader in onChange
   };
+
+  console.log("teste", shelves.wantToRead);
 
   return (
     <>
@@ -76,9 +74,8 @@ function App() {
           render={() => (
             <Home
               shelves={shelves}
-              onChange={
-                onChange
-              } /*creating a route for the home page and passing the components */
+              onChange={onChange}
+              /*creating a route for the home page and passing the components */
             />
           )}
         />
@@ -86,9 +83,9 @@ function App() {
           path="/search"
           render={() => (
             <Search
-              onChange={
-                onChange
-              } /*creating a route for the search page and passing the components */
+              onChange={onChange}
+              shelves={shelves}
+              /*creating a route for the search page and passing the components */
             />
           )}
         />

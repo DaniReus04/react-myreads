@@ -2,9 +2,19 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Project Overview
+
+This project was created for the user interact with books and shelves, about what is reading, want to, and already read!
+Also have a search page to search for more books to his own shelves.
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Install all the dependences of the project.
+To read more about: (https://docs.npmjs.com/cli/v7/commands/npm-start).
 
 ### `npm start`
 

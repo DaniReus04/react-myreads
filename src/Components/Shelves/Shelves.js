@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Shelves.css";
-import BooksList from "../BooksList/BooksList.jsx";
+import BooksList from "../BooksList/BooksList.js";
 
 //Here I created the shelves list to put in the home page 
 

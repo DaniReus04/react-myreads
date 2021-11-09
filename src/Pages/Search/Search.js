@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as BooksAPI from "../../API/BooksAPI";
 import BackArrow from "../../utils/BackArrow.png";
-import BooksList from "../../Components/BooksList/BooksList";
+import BooksList from "../../Components/BooksList/BooksList.js";
 import Loader from "../../Components/Loader/Loader";
 import { DebounceInput } from "react-debounce-input";
 
 // Here I created a Link to the home page and the input fild with query and the books list
 
-function Search({ onChange }) {
+function Search({ onChange, shelves }) {
   const [loader, setLoader] = useState(false);
   const [search, setSearch] = useState({
     query: "",
@@ -36,6 +36,8 @@ function Search({ onChange }) {
     }
     setLoader(false); //Saying to use the loader only in onChangeSearch
   };
+
+  console.log("tste", search.books);
   return (
     <>
       <div className="search-section">
@@ -70,6 +72,11 @@ function Search({ onChange }) {
           {search.books && search.books.length > 0 && (
             <ul className="books-ul">
               {search.books.map((books) => {
+                // shelves.map((book) =>
+                //   books.id && books.id === book.id //I tryied like this to pass the home book state to here, and many others types
+                //     ? (books.shelf = book.shelf)     but I am not getting what I want. Can you help me?
+                //     : ""
+                // );
                 return (
                   <BooksList key={books.id} item={books} onChange={onChange} />
                 );
