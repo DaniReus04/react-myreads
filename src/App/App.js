@@ -39,25 +39,25 @@ function App() {
     await BooksAPI.update(book, newShelf).then(() => {
       book.shelf = newShelf;
 
-      if (newShelf !== "none") {
+      if (oldShelf !== undefined && newShelf !== "none") {
         //In this part, I called only the books that already have a shelf and are going to a new one
         setShelves({
           ...shelves,
           [newShelf]: [...shelves[newShelf], book], //newShelf request
           [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id), //oldShelf remove
         });
-      } else {
+      } else if (oldShelf !== undefined) {
         //In this part, I called only the books that are moving out of it shelf and aren't going to a new one, resuming, books that the user remove
         setShelves({
           ...shelves,
           [oldShelf]: shelves[oldShelf].filter((item) => item.id !== book.id),
         });
+      } else {
+        setShelves({ ...shelves, [newShelf]: [...shelves[newShelf], book] });
       }
     });
     setLoader(false); //Here I confirmed the Loader in onChange
   };
-
-  console.log("teste", shelves.wantToRead);
 
   return (
     <>

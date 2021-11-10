@@ -37,7 +37,6 @@ function Search({ onChange, shelves }) {
     setLoader(false); //Saying to use the loader only in onChangeSearch
   };
 
-  console.log("tste", search.books);
   return (
     <>
       <div className="search-section">
@@ -72,11 +71,25 @@ function Search({ onChange, shelves }) {
           {search.books && search.books.length > 0 && (
             <ul className="books-ul">
               {search.books.map((books) => {
-                // shelves.map((book) =>
-                //   books.id && books.id === book.id //I tryied like this to pass the home book state to here, and many others types
-                //     ? (books.shelf = book.shelf)     but I am not getting what I want. Can you help me?
-                //     : ""
-                // );
+                const wantToShelf = Object.values(shelves.wantToRead).find(
+                  (booksOnShelves) => booksOnShelves.id === books.id
+                );
+                const currentlyShelf = Object.values(
+                  shelves.currentlyReading
+                ).find((booksOnShelves) => booksOnShelves.id === books.id);
+                const readShelf = Object.values(shelves.read).find(
+                  (booksOnShelves) => booksOnShelves.id === books.id
+                );
+
+                if (wantToShelf) {
+                  books.shelf = wantToShelf.shelf;
+                } else if (currentlyShelf) {
+                  books.shelf = currentlyShelf.shelf;
+                } else if (readShelf) {
+                  books.shelf = readShelf.shelf;
+                } else {
+                  books.shelf = "none";
+                }
                 return (
                   <BooksList key={books.id} item={books} onChange={onChange} />
                 );
