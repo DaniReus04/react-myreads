@@ -3,7 +3,6 @@ import "./Search.css";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as BooksAPI from "../../API/BooksAPI";
-import BackArrow from "../../utils/BackArrow.png";
 import BooksList from "../../Components/BooksList/BooksList.js";
 import Loader from "../../Components/Loader/Loader";
 import { DebounceInput } from "react-debounce-input";
@@ -40,12 +39,15 @@ function Search({ onChange, shelves }) {
   return (
     <>
       <div className="search-section">
-        <Link className="go-back" to="/">
-          <img src={BackArrow} alt="Back" />
+        <Link className="go-back" to="/" aria-label="Go back">
+          <svg viewBox="0 0 24 24">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+          </svg>
         </Link>
         <DebounceInput //Imported a DebounceInput to set a minLength of caracters and a timeout when the user stop typing to search the correct books
           className="search-box"
-          placeholder="Type your book here..."
+          placeholder="Search by title, author, or ISBN..."
           minLength={1}
           disabled={loader}
           value={search.query}
@@ -57,28 +59,25 @@ function Search({ onChange, shelves }) {
       {loader ? (
         <Loader />
       ) : (
-        <>
+        <div className="search-results">
           {booksError && (
-            <p
-              style={{
-                textAlign: "center",
-                fontSize: "25px",
-              }}
-            >
-              Something went wrong!
-            </p>
+            <div className="search-message">
+              <span className="search-message-icon">😕</span>
+              <p className="search-message-title">Something went wrong</p>
+              <p className="search-message-hint">Try a different search term</p>
+            </div>
           )}
           {search.books && search.books.length > 0 && (
             <ul className="books-ul">
               {search.books.map((books) => {
                 const wantToShelf = Object.values(shelves.wantToRead).find(
-                  (booksOnShelves) => booksOnShelves.id === books.id
+                  (booksOnShelves) => booksOnShelves.id === books.id,
                 );
                 const currentlyShelf = Object.values(
-                  shelves.currentlyReading
+                  shelves.currentlyReading,
                 ).find((booksOnShelves) => booksOnShelves.id === books.id);
                 const readShelf = Object.values(shelves.read).find(
-                  (booksOnShelves) => booksOnShelves.id === books.id
+                  (booksOnShelves) => booksOnShelves.id === books.id,
                 );
 
                 if (wantToShelf) {
@@ -96,8 +95,25 @@ function Search({ onChange, shelves }) {
               })}
             </ul>
           )}
-          {search.query && search.books.length === 0 && <p>No books found!</p>}
-        </>
+          {search.query && search.books.length === 0 && !booksError && (
+            <div className="search-message">
+              <span className="search-message-icon">🔍</span>
+              <p className="search-message-title">No books found</p>
+              <p className="search-message-hint">
+                Try adjusting your search terms
+              </p>
+            </div>
+          )}
+          {!search.query && !search.books && (
+            <div className="search-message">
+              <span className="search-message-icon">📖</span>
+              <p className="search-message-title">Find your next read</p>
+              <p className="search-message-hint">
+                Start typing to search thousands of books
+              </p>
+            </div>
+          )}
+        </div>
       )}
     </>
   );

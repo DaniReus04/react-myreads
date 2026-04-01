@@ -6,9 +6,9 @@ import NoImage from "../../utils/noimage.png";
 
 function BooksList({ item, onChange }) {
   return (
-    <li className="shelf" key={item.id}>
-      <div className="individual-shelf">
-        <div className="image">
+    <li className="book-card" key={item.id}>
+      <div className="book-card-inner">
+        <div className="book-cover-wrapper">
           <figure>
             <img
               src={
@@ -19,23 +19,29 @@ function BooksList({ item, onChange }) {
               alt={item.title}
             />
           </figure>
+          <div className="book-shelf-badge">
+            <select
+              className="books-actions-select"
+              value={item.shelf ? item.shelf : "none"}
+              onChange={(e) => onChange(e, item, item.shelf)}
+            >
+              <option disabled>Move to...</option>
+              <option value="currentlyReading">Reading</option>
+              <option value="wantToRead">Going to Read</option>
+              <option value="read">Read</option>
+              <option value="none">None</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <select
-            className="books-actions-select"
-            value={item.shelf ? item.shelf : "none"}
-            onChange={(e) => onChange(e, item, item.shelf)}
-          >
-            <option disabled>Move to...</option>
-            <option value="currentlyReading">Reading</option>
-            <option value="wantToRead">Going to Read</option>
-            <option value="read">Read</option>
-            <option value="none">None</option>
-          </select>
-        </div>
-        <div>
-          <p className="title">{item.title}</p>
-          <p className="author">{item.authors ? item.authors : "No author"}</p>
+        <div className="book-info">
+          <p className="book-title">{item.title}</p>
+          <p className="book-author">
+            {item.authors
+              ? Array.isArray(item.authors)
+                ? item.authors.join(", ")
+                : item.authors
+              : "Unknown author"}
+          </p>
         </div>
       </div>
     </li>

@@ -4,9 +4,20 @@ import "./Header.css";
 
 function Header() {
   return (
-    <div className="header">
-      <p>My Reads</p>
-    </div>
+    <header className="header">
+      <div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <h1 className="header-title">MyReads</h1>
+        </div>
+        <p className="header-subtitle">Track your reading journey</p>
+      </div>
+    </header>
   );
 }
 

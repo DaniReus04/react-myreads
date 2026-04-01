@@ -13,7 +13,13 @@ function Shelves({ shelves, onChange }) {
           return <BooksList key={item.id} item={item} onChange={onChange} />;
         })
       ) : (
-        <p>You don't have books here!</p>
+        <li className="shelves-empty">
+          <span className="shelves-empty-icon">📚</span>
+          <p className="shelves-empty-text">No books on this shelf yet</p>
+          <p className="shelves-empty-hint">
+            Use the search button to find and add books
+          </p>
+        </li>
       )}
     </ul>
   );
